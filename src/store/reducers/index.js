@@ -9,5 +9,15 @@ const defaultState = {
 // state 为外面可以使用得到的数据
 // action判断处理全局数据
 export default (state = defaultState, action) => {
+  if(action.type==='num_add'){
+    let newState=JSON.parse(JSON.stringify(state))
+    newState.numbers+=action.value
+    return newState
+  }
+  if(action.type==='num_reduce'){
+    let newState=JSON.parse(JSON.stringify(state))
+    newState.numbers-=action.value
+    return newState
+  }
   return state;
 };
