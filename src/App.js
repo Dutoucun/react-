@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from "react";
 // 1、接收仓库store中的数据的一个连接器
 import { connect } from "react-redux";
-import { numadd, numreduce ,changImg} from "./store/actionCreator";
+import { numadd, numreduce, changImg, webNum } from "./store/actionCreator";
 class App extends Component {
-  componentDidMount () {
-  document.addEventListener('keyup', (e) => {
-   return e.keyCode===37?this.props.num_reduce():e.keyCode===39?this.props.num_add():null 
-  });
-}
+  componentDidMount() {
+    document.addEventListener('keyup', (e) => {
+      return e.keyCode === 37 ? this.props.num_reduce() : e.keyCode === 39 ? this.props.num_add() : null
+    });
+    // 发送异步请求
+    this.props.webNumInit()
+  }
   render() {
     return (
       <Fragment>
@@ -15,15 +17,16 @@ class App extends Component {
           <button onClick={this.props.num_reduce} >-</button>
           <h1>{this.props.num}</h1>
           <button onClick={this.props.num_add}>+</button>
+          <button onClick={this.props.imgChange}>Rondom</button>
         </div>
         <div className='meizi'>
-        <button onClick={this.props.imgChange}>Rondom</button>
-        <h1>{this.props.imgNum}</h1>
-       
-          <img src={require('./images/0'+this.props.imgNum+'.jpg')} alt='毛都没有'></img>
+          <img src={require('./images/0' + this.props.imgNum + '.jpg')} alt='毛都没有'></img>
+        </div>
+        <div>
+          <h1>{this.props.wNum}</h1>
         </div>
         <style jsx="true">
-            {`
+          {`
          .App{
            width: 300px;
            margin:auto;
@@ -34,8 +37,17 @@ class App extends Component {
           button{
               height:30px; 
             }
+            .meizi{
+              display: flex;
+           justify-content: center;
+           align-items: center;
+            }
+            img{
+              
+           
+            }
             `}
-          </style>
+        </style>
       </Fragment>
     );
   }
@@ -43,9 +55,11 @@ class App extends Component {
 // 3、最终store的数据通过属性props的方式来实现
 // 创建一个数据映射对象
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    num:state.numberAR.numbers,
-    imgNum:state.imgChange.num
+    num: state.numberAR.numbers,
+    imgNum: state.imgChange.num,
+    wNum:state.web.webNumber
   };
 };
 // 4新增一个事件和属性映射函数
@@ -58,8 +72,11 @@ const mapDisspatch = (dispatch) => {
     num_reduce: () => {
       dispatch(numreduce(20))
     },
-    imgChange:()=>{
+    imgChange: () => {
       dispatch(changImg())
+    },
+    webNumInit: () => {
+      dispatch(webNum())
     }
   }
 }

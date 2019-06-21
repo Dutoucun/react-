@@ -1,5 +1,6 @@
 // 引入actiontypes常量
-import {NUM_ADD,NUM_REDUCE,CHANGIMG  } from "../actionTypes";
+import {NUM_ADD,NUM_REDUCE,CHANGIMG ,WEB } from "../actionTypes";
+import axios from "axios";
 
 // 增加action
 
@@ -21,6 +22,18 @@ export const changImg=()=>{
     return {
         type:CHANGIMG,
         value:Math.floor(Math.random()*5+1)
+    }
+    }
+export const webNum=()=>{
+    return (dispatch)=>{
+        axios.get("https://easy-mock.com/mock/5cff5f447806440acf2c6856/baseList/").then(res=>{
+        console.log(res)   
+        const action={
+                type:WEB,
+                value:res.data.nums
+            }
+            dispatch(action)
+        })
     }
     }
     
