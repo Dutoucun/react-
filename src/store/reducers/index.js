@@ -1,20 +1,22 @@
 // reducers管理员
 
+// 引入自定义变量
+import {NUM_ADD,NUM_REDUCT  } from "../actionTypes";
 // 定义一个默认数据
 const defaultState = {
   numbers: 100
 };
 
-// 把管理员和数据一并暴露出去
+// 把管理员和数据一并暴露出去 
 // state 为外面可以使用得到的数据
 // action判断处理全局数据
 export default (state = defaultState, action) => {
-  if(action.type==='num_add'){
+  if(action.type===NUM_ADD){
     let newState=JSON.parse(JSON.stringify(state))
     newState.numbers+=action.value
     return newState
   }
-  if(action.type==='num_reduce'){
+  if(action.type===NUM_REDUCT ){
     let newState=JSON.parse(JSON.stringify(state))
     newState.numbers-=action.value
     return newState

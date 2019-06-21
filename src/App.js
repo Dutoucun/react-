@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
 // 1、接收仓库store中的数据的一个连接器
-import { connect } from "react-redux";
+import { connect } from "react-redux"; 
+import {NUM_ADD,NUM_REDUCT  } from "./store/actionTypes";
 class App extends Component {
   render() {
     return (
       <Fragment> 
         <div className='App'>
-        <button onClick={this.props.num_reduce}>-</button>
+        <button onClick={this.props.num_reduce}>-</button>        
           <h1>{this.props.num}</h1>
           <button onClick={this.props.num_add}>+</button>
           <style jsx>
@@ -43,7 +44,7 @@ const mapDisspatch=(dispatch)=>{
     num_add:()=>{
       // 4.1创建一个action
       const action={
-        type:'num_add',
+        type:NUM_ADD,
         value:1
       }
       // 4.2派发action 会触发 reducer管理员的代码
@@ -52,7 +53,7 @@ const mapDisspatch=(dispatch)=>{
     num_reduce:()=>{
       // 4.1创建一个action
       const action={
-        type:'num_reduce',
+        type:NUM_REDUCT,
         value:1
       }
       dispatch(action)
