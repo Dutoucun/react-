@@ -1,7 +1,7 @@
 // reducers管理员
 
 // 引入自定义变量
-import {NUM_ADD,NUM_REDUCT  } from "../actionTypes";
+import {NUM_ADD,NUM_REDUCE  } from "../actionTypes";
 // 定义一个默认数据
 const defaultState = {
   numbers: 100
@@ -16,7 +16,7 @@ export default (state = defaultState, action) => {
     newState.numbers+=action.value
     return newState
   }
-  if(action.type===NUM_REDUCT ){
+  if(action.type===NUM_REDUCE ){
     let newState=JSON.parse(JSON.stringify(state))
     newState.numbers-=action.value
     return newState
