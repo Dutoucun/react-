@@ -1,5 +1,5 @@
 // 引入actiontypes常量
-import {NUM_ADD,NUM_REDUCE  } from "../actionTypes";
+import {NUM_ADD,NUM_REDUCE,CHANGIMG  } from "../actionTypes";
 
 // 增加action
 
@@ -16,3 +16,11 @@ export const numreduce=(unit)=>{
         value:unit
     }
     }
+// 
+export const changImg=()=>{
+    return {
+        type:CHANGIMG,
+        value:Math.floor(Math.random()*5+1)
+    }
+    }
+    

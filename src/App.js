@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 // 1、接收仓库store中的数据的一个连接器
 import { connect } from "react-redux";
-import { numadd, numreduce } from "./store/actionCreator";
+import { numadd, numreduce ,changImg} from "./store/actionCreator";
 class App extends Component {
   componentDidMount () {
   document.addEventListener('keyup', (e) => {
@@ -15,6 +15,12 @@ class App extends Component {
           <button onClick={this.props.num_reduce} >-</button>
           <h1>{this.props.num}</h1>
           <button onClick={this.props.num_add}>+</button>
+        </div>
+        <div className='meizi'>
+        <button onClick={this.props.imgChange}>Rondom</button>
+        <h1>{this.props.imgNum}</h1>
+       
+          <img src={require('./images/0'+this.props.imgNum+'.jpg')} alt='毛都没有'></img>
         </div>
         <style jsx="true">
             {`
@@ -38,7 +44,8 @@ class App extends Component {
 // 创建一个数据映射对象
 const mapStateToProps = state => {
   return {
-    num: state.numbers
+    num:state.numberAR.numbers,
+    imgNum:state.imgChange.num
   };
 };
 // 4新增一个事件和属性映射函数
@@ -50,6 +57,9 @@ const mapDisspatch = (dispatch) => {
     },
     num_reduce: () => {
       dispatch(numreduce(20))
+    },
+    imgChange:()=>{
+      dispatch(changImg())
     }
   }
 }
